@@ -1,0 +1,40 @@
+/* Apply to everything */
+body {
+    font-family: 'Roboto Condensed', sans-serif;  
+}
+
+h1 {
+    text-align: center;
+}
+  
+p {
+    font-size: 20px;
+}
+
+
+/* Home page CSS */
+
+#slide1 {
+    color: white;
+    height: 450px;
+    padding-top: 100px;
+    background-position: 50% 7%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url('/assets/images/menu-1.png')
+}
+
+#slide2 {
+    color: white;
+    height: 450px;
+    padding-top: 100px;
+    background-position: 50% 55%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url('/assets/images/morning-1.png')
+}
+
+.home-card {
+    border-style: none;
+}
+

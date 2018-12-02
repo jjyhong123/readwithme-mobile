@@ -1,0 +1,112 @@
+<!-- Navbar -->
+{{> navbar-partial }}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Convert your image to lifelike speech.</h1>
+    </div>
+  </div>
+
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-deck">
+
+        <div class="card mb-3">
+          <div class="card-header">Upload document or enter text here</div>
+          <div class="card-body">
+            <h5 class="card-title">File upload</h5>
+            <!-- File upload -->
+            <div class="input-group">
+              <form action="/api/add" method="post" enctype="multipart/form-data"><!---->
+                <!--input type="file" name="image" /-->
+                <input type="file" name="image" accept="image/*" capture="camera" />
+                <button class="btn btn-dark" type="submit">Upload</button>
+              </form>
+              <!-- No text detected message -->
+              {{#if err}}
+              <p>{{err}}</p>{{/if}}
+            </div>
+
+            <!-- Image thumbnail -->
+            {{#if image}}
+            <img src="{{image}}" alt="Selected image thumbnail" height="100px" width="100px"> {{/if}}
+
+            <br /> {{#if src}}
+            <!-- Translate -->
+            <form action="/api/translate" method="post">
+              <div class="form-group">
+                <label for="language">Select two letter language code:</label>
+                <select class="form-control" name="targetLang" id="language">
+                  <option>en</option>
+                  <option>es</option>
+                  <option>ko</option>
+                  <option>hi</option>
+                </select>
+                <input type="hidden" name="text" value="{{text}}" />
+                <input type="hidden" name="image" value="{{image}}" />
+              </div>
+              <button type="submit" class="btn btn-dark" style="float: right;">Translate</button>
+            </form>
+            {{/if}}
+
+          </div>
+        </div>
+
+        {{#if src}}
+        <div class="card border-success mb-3">
+          <div class="card-header">Now reading</div>
+          <div class="card-body text-success">
+            <p class="card-text">{{text}}</p>
+          </div>
+          <!--
+          <audio controls id="polly-audio">
+            <source src={{src}} type="audio/mp3" />
+            <p>Your browser doesn't support HTML5 audio. Here is a
+              <a href={{src}}>link to the audio</a> instead.</p>
+          </audio>
+          -->
+
+          <audio id="my-audio">
+            <source src={{src}} type="audio/mp3" />
+            <p>Your browser doesn't support HTML5 audio. Here is a
+              <a href={{src}}>link to the audio</a> instead.</p>
+          </audio>
+          <button id="play">play</button>
+          <button id="pause">pause</button>
+
+
+
+
+
+          {{#if user}}
+          <form action="/db/save" method="post">
+
+            <input type="hidden" name="pollyUrl" value="{{src}}" />
+            <input type="hidden" name="text" value="{{text}}" />
+            <input type="hidden" name="googleId" value="{{user.googleId}}" /> {{#if dbRedirect}}
+            <p>Item successfully saved.</p>
+            {{else}}
+            <button class="btn btn-dark" type="submit" style="margin-left: 15px;">Save to library!</button>
+            {{/if}}
+
+          </form>
+          {{/if}}
+
+        </div>
+        {{else}}
+        <div class="card mb-3">
+          <div class="card-header">Now reading</div>
+          <div class="card-body">
+            <p class="card-text">No text submitted yet.</p>
+          </div>
+        </div>
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+
+</div>

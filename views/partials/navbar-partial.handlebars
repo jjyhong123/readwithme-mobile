@@ -1,0 +1,51 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+  <div class="container">
+
+    <a class="navbar-brand" href="/">
+      <!-- Fix image src-->
+      <img src="/assets/images/logo2.png" alt="logo" height="100" width="250">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon">
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/"> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/library"> Library
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/picture"> Picture
+          </a>
+        </li>
+
+        {{#if user}}
+        <li class="nav-item nav-link" style="margin-left: 50px">
+          Welcome, {{user.username}}!
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/logout"> Log out
+          </a>
+        </li>
+
+        {{else}}
+        <li class="nav-item" style="margin-left: 50px; cursor: pointer">
+          <a class="nav-link" href="/auth/google"> Log in
+          </a>
+        </li>
+        {{/if}}
+
+      </ul>
+
+    </div>
+  </div>
+
+</nav>
