@@ -8,15 +8,23 @@ router.get("/", (req, res) => {
 })
 
 router.get("/picture", (req, res) => {
-  res.render("picture", { user: req.user })
+  if (req.session.obj) {
+    let obj = req.session.obj
+    req.session.obj = null;
+    res.render("picture", { user: req.user, src: obj.src, image: obj.image, text: obj.text })
+  }
+  else {
+    res.render("picture", { user: req.user })
+  }
 })
 
 router.get("/library", (req, res) => {
+
   if (req.user) {
     db.User.findOne({ googleId: req.user.googleId })
     .populate("library")
     .then((dbUser) => {
-      res.json(dbUser)
+      res.render("library", { user: dbUser })
     })
     .catch((err) => res.json(err))
   } else {

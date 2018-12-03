@@ -11,8 +11,14 @@ router.post("/save", (req, res) => {
     .then((dbUser) => {
         res.render("picture", { user: req.user, src: req.body.pollyUrl, text: req.body.text, dbRedirect: true });
     })
-    .catch(err => res.json)
+    .catch(err => res.json(err))
 });
+
+router.get("/delete/:id", (req, res) => {
+    db.Item.findByIdAndDelete(req.params.id)
+    .then(() => res.redirect("/library"))
+    .catch(err => res.json(err))
+})
 
 // Export routes for server.js to use.
 module.exports = router;

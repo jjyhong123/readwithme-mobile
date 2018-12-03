@@ -38,3 +38,7 @@ p {
     border-style: none;
 }
 
+/* Picture page CSS */
+#polly-audio {
+    margin: auto auto 10px auto
+}
