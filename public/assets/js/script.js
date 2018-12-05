@@ -12,7 +12,8 @@ $(document).ready(() => {
         $('#placeholder-image').attr('src', e.target.result);
         $('#placeholder-image').attr('alt', "selected image thumbnail");
         $('#placeholder-image').prev('#placeholder-image').attr('id', "selected-image");
-        $('#imgUrl').attr('value', e.target.result);
+        $('#imgUrl').attr('value', 1);
+        // $('#imgUrl').attr('value', e.target.result);
 
       }
 
