@@ -8,7 +8,12 @@ $(document).ready(() => {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        $('#blah').attr('src', e.target.result);
+
+        $('#placeholder-image').attr('src', e.target.result);
+        $('#placeholder-image').attr('alt', "selected image thumbnail");
+        $('#placeholder-image').prev('#placeholder-image').attr('id', "selected-image");
+        $('#imgUrl').attr('value', e.target.result);
+
       }
 
       reader.readAsDataURL(input.files[0]);
@@ -18,6 +23,10 @@ $(document).ready(() => {
   $("#imgInp").change(function () {
     readURL(this);
   });
+
+  // Initially create one img element with src set to url of placeholder image
+  // On image select, reset src to url of selected image
+  // Store url of selected image in hidden input
 
   /*----------------------------------------------------------------------------------*/
 

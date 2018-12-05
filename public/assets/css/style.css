@@ -13,7 +13,6 @@ p {
 
 
 /* Home page CSS */
-
 #slide1 {
     color: white;
     height: 450px;
@@ -38,7 +37,35 @@ p {
     border-style: none;
 }
 
+/* Library page CSS */
+.item-card {
+    padding: 20px;
+}
+
+.item-card:not(:last-child) {
+    margin-bottom: 20px;
+}
+
 /* Picture page CSS */
 #polly-audio {
-    margin: auto auto 10px auto
+    /*margin: auto auto 10px auto;*/
+    vertical-align: middle;
+}
+
+.card-footer {
+    min-height: 79px;
+}
+
+#save-form {
+    vertical-align: middle;
+}
+
+.form-inline {
+    padding: 7.5px 0 0 0;
+}
+
+#right-side {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
 }

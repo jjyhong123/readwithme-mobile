@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 // Create Schema 
 const ItemSchema = new Schema({
-    //imageUrl: String, // Regex
-    pollyUrl: String, // Regex?
+    imageUrl: String,
+    pollyUrl: String,
     text: String
 });
 

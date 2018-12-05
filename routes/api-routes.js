@@ -42,8 +42,15 @@ const handleTextToVoice = (hablante, texto, imagen, req, res) => {
       console.log(error.code, error.stack, error)
     }
 
+    else {
+      res.render("picture", { user: req.user, src: url, image: imagen, text: texto }) // only to aid with CSS, delete after
+    }
+
+    /*
     req.session.obj = { src: url, image: imagen, text: texto }
     res.redirect("/picture") 
+    */
+    
 
   });
 };
@@ -52,15 +59,16 @@ router.post(
   '/add',
   testMulter,
   (req, res) => {
+    let image = req.body.imageUrl
     let params = {
       Image: {
         Bytes: req.file.buffer
       }
     }
     rekognition.detectText(params, function(err, data) {
-      if (err) return res.render("picture", { user: req.user, err: "An error occurred." })
+      if (err) return res.render("picture", { user: req.user, image: image, err: "An error occurred." })
       else     {
-        if (!data.TextDetections.length) return res.render("picture", { user: req.user, err: "No text detected in image." })
+        if (!data.TextDetections.length) return res.render("picture", { user: req.user, image: image, err: "No text detected in image." })
         let textDetections = data.TextDetections
         let lineDetections = textDetections.filter(detection => detection.Type === "LINE" && detection.Confidence >= 90) 
         let textArray = lineDetections.map(detection => detection.DetectedText)
@@ -70,11 +78,11 @@ router.post(
             Text: text
           };
           comprehend.detectDominantLanguage(params, function(err, data) {
-            if (err) res.render("picture", { user: req.user, err: "An error occurred." })
+            if (err) res.render("picture", { user: req.user, image: image, err: "An error occurred." })
             else     {
               let language = data.Languages[0].LanguageCode
               let speaker = convertLanguageToSpeaker(language)
-              handleTextToVoice(speaker, text, null, req, res);
+              handleTextToVoice(speaker, text, image, req, res);
             }           
           });
         }
