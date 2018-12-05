@@ -21,7 +21,7 @@ const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
 // Automatically parse request body as form data
 router.use(bodyParser.urlencoded({ extended: false }));
 
-var testMulter = multer({limits: { fieldNameSize: 25 * 1024 * 1024 }}).single("image")
+var testMulter = multer({limits: { fieldSize: 25 * 1024 * 1024 * 1024, fieldNameSize: 25 * 1024 * 1024 * 1024 }}).single("image")
 
 const convertLanguageToSpeaker = (language) => {
   const languageSpeakers = { 'zh': 'Zhiyu', 'da': 'Naja', 'nl': 'Lotte', 'en': 'Joanna', 'fr': 'Celine', 'de': 'Marlene', 'hi': 'Aditi', 'is': 'Dora', 'it': 'Carla', 'ja': 'Mizuki', 'ko': 'Seoyeon', 'no': 'Liv', 'pl': 'Ewa', 'pt': 'Ines', 'ro': 'Carmen', 'ru': 'Tatyana', 'es': 'Lucia', 'sv': 'Astrid', 'tr': 'Filiz' }
