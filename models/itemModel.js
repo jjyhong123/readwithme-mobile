@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Create Schema 
 const ItemSchema = new Schema({
-    imageUrl: String,
+    image: Buffer,
     pollyUrl: String,
     text: String
 });
